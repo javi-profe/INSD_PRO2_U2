@@ -20,18 +20,26 @@ from scipy import optimize, integrate, interpolate
 # 1) Básicos y cadenas
 def sum_even(nums: List[int]) -> int:
     """Suma los enteros pares de la lista. Si no hay pares, devuelve 0."""
-    pass
+    suma = 0
+    for n in nums:
+        if n%2==0:
+          suma = suma + n
+    return suma
 
 def normalize_str(s: str) -> str:
     """Devuelve s sin espacios al inicio/fin y en minúsculas."""
-    pass
+    return s.strip().lower()
 
 def count_words(text: str) -> Dict[str,int]:
     """
     Devuelve un dict palabra->frecuencia.
     Reglas: separa por espacios; elimina . , ; : ! ? al final de cada token; ignora mayúsculas.
     """
-    pass
+    caracteres_no_validos = ['.',',',';',':','!','¡','¿','?']
+    for caracter in caracteres_no_validos:
+        text = text.replace(caracter, '')
+    palabras = text.lower().split(' ')
+    return {p:palabras.count(p) for p in palabras}
 
 # 2) Ficheros y excepciones
 def safe_divide(a: float, b: float) -> Optional[float]:
