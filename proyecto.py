@@ -103,6 +103,9 @@ def squares_of_odds(n: int) -> List[int]:
 
 def random_color(seed: int) -> str:
     """Fija random.seed(seed) y retorna un color aleatorio de ['rojo','azul','verde']."""
+    colores = ['rojo','azul','verde']
+    random.seed(seed)
+    return random.choice(colores)
     pass
 
 def days_between(d1: str, d2: str) -> int:
