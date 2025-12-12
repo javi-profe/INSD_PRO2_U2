@@ -18,6 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pandas.core.arrays.categorical import contains
 from scipy import optimize, integrate, interpolate
+from scipy.optimize import OptimizeResult
 from setuptools.unicode_utils import try_encode
 import pandas as pd
 
@@ -135,18 +136,21 @@ def numpy_minmax_scale(arr: List[float]) -> List[float]:
     return (arr - valor_min) / (valor_max - valor_min)
 
 # 5) SciPy
-def scipy_root_cos_minus_x() -> float:
+def scipy_root_cos_minus_x() -> OptimizeResult:
     """Raíz de f(x)=cos(x)-x con optimize.root, x0=0.5."""
-    pass
+    def f(x):
+       return np.cos(x)-x
+    opt = optimize.root(f,x0=0.5)
+    return opt.x[0]
 
 def scipy_integral_sin() -> float:
     """Integral de sin(x) de 0 a pi con integrate.quad. Devuelve el área."""
-    pass
+    return integrate.quad(np.sin, 0, np.pi)
 
 def interp_linear(x: List[float], y: List[float], xq: float) -> float:
     """Interpolación lineal: devuelve f(xq) usando interpolate.interp1d."""
-    pass
-
+    f =interpolate.interp1d(x, y, kind='linear', fill_value="extrapolate")
+    return f(xq)
 # 6) Visualización
 def plot_line_time_series(xs: List[float], ys: List[float], out_path: str) -> bool:
     """
