@@ -119,14 +119,20 @@ def days_between(d1: str, d2: str) -> int:
 # 4) NumPy
 def numpy_vector_length(v: List[float]) -> float:
     """Norma Euclídea de v con NumPy."""
-    pass
+    return  round(np.linalg.norm(v),2)
 
 def numpy_minmax_scale(arr: List[float]) -> List[float]:
     """
     Normaliza a [0,1]. Si todos los valores son iguales, devuelve todos 0.0.
     """
+    arr = np.array(arr)
+    valor_min = arr.min()
+    valor_max = arr.max()
 
-    pass
+    if valor_min == valor_max:
+        return np.zeros_like(arr)
+
+    return (arr - valor_min) / (valor_max - valor_min)
 
 # 5) SciPy
 def scipy_root_cos_minus_x() -> float:
