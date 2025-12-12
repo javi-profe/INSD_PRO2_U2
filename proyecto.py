@@ -125,6 +125,7 @@ def numpy_minmax_scale(arr: List[float]) -> List[float]:
     """
     Normaliza a [0,1]. Si todos los valores son iguales, devuelve todos 0.0.
     """
+
     pass
 
 # 5) SciPy
@@ -165,4 +166,19 @@ class Vector2D:
       - __repr__(): 'Vector2D(x=?, y=?)'
       - length(self) -> float: norma Euclídea
     """
+    def __init__(self, x: float, y: float):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other: "Vector2D") -> "Vector2D":
+        return Vector2D(self.x + other.x, self.y + other.y)
+
+    def __eq__(self, other: "Vector2D") -> bool:
+        return self.x == other.x and self.y == other.y
+
+    def __repr__(self):
+        return f'(Vector2D(x={self.x}, y={self.y}))'
+
+    def length(self) -> float:
+        return numpy_vector_length([self.x, self.y])
     pass
