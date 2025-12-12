@@ -99,7 +99,7 @@ def filter_customers_json(in_path: str, out_path: str) -> int:
 # 3) Comprensiones, random, datetime
 def squares_of_odds(n: int) -> List[int]:
     """Lista de cuadrados de impares 1..n (ambos inclusive)."""
-    pass
+    return [num**2 for num in range(1, n + 1) if num % 2 != 0]
 
 def random_color(seed: int) -> str:
     """Fija random.seed(seed) y retorna un color aleatorio de ['rojo','azul','verde']."""
