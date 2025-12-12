@@ -10,7 +10,7 @@ Instrucciones generales:
 
 # === IMPORTS (añade otros si son necesarios) ===
 import csv, json, os, random, math
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 from warnings import catch_warnings
 
@@ -110,6 +110,10 @@ def random_color(seed: int) -> str:
 
 def days_between(d1: str, d2: str) -> int:
     """Recibe fechas 'YYYY-MM-DD'. Devuelve abs(d2-d1) en días (entero)."""
+    d1 = datetime.strptime(d1, '%Y-%m-%d')
+    d2 = datetime.strptime(d2, '%Y-%m-%d')
+    dias = abs(d1-d2) / timedelta(days=1)
+    print(dias)
     pass
 
 # 4) NumPy
