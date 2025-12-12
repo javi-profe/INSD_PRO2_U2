@@ -12,10 +12,15 @@ Instrucciones generales:
 import csv, json, os, random, math
 from datetime import datetime
 from typing import List, Dict, Optional
+from warnings import catch_warnings
 
 import numpy as np
 import matplotlib.pyplot as plt
+from pandas.core.arrays.categorical import contains
 from scipy import optimize, integrate, interpolate
+from setuptools.unicode_utils import try_encode
+import pandas as pd
+
 
 # 1) Básicos y cadenas
 def sum_even(nums: List[int]) -> int:
@@ -44,22 +49,52 @@ def count_words(text: str) -> Dict[str,int]:
 # 2) Ficheros y excepciones
 def safe_divide(a: float, b: float) -> Optional[float]:
     """Devuelve a/b. Si b==0 o hay error, devuelve None."""
-    pass
+    try:
+        return a/b
+    except:
+        return None
 
 def read_csv_sum_revenue(path: str) -> float:
     """
     Lee un CSV con columnas units_sold y unit_price.
     Convierte a numérico; ignora NaN o negativos; suma units_sold*unit_price.
     """
-    pass
+    df_ventas = pd.read_csv(path)
+    total = 0
+    for i in range(0, len(df_ventas)):
+        if pd.isna(df_ventas.loc[i,'units_sold'])  or pd.isna(df_ventas.loc[i,'unit_price']):
+            pass
+        else:
+            try:
+                df_ventas.loc[i,'units_sold'] = pd.to_numeric(str(df_ventas.loc[i,'units_sold']).replace(',','.'))
+                df_ventas.loc[i,'unit_price'] = pd.to_numeric(str(df_ventas.loc[i,'unit_price']).replace(',','.'))
+                if df_ventas.loc[i,'units_sold'] > 0 and df_ventas.loc[i,'unit_price'] > 0:
+                    total = total + (df_ventas.loc[i,'units_sold'] * df_ventas.loc[i,'unit_price'])
+            except:
+                pass
+
+
+    return total
 
 def filter_customers_json(in_path: str, out_path: str) -> int:
     """
     JSON (lista de objetos con email y age).
     Escribe en out_path solo clientes con email que contenga '@' y age > 0.
     Devuelve el número de clientes escritos.
+    :rtype: int
     """
-    pass
+    total_user = 0
+    with open(in_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    for user in data['users']:
+        if '@' in user['email'] and user['age'] > 0:
+            total_user = total_user + 1
+            with open(out_path, "a", encoding="utf-8") as f:
+                nombre = str.split(user['email'],'@')[0]
+                f.write(nombre+'\n')
+                f.close()
+    f.close()
+    return total_user
 
 # 3) Comprensiones, random, datetime
 def squares_of_odds(n: int) -> List[int]:

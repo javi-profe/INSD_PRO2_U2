@@ -7,3 +7,8 @@ if __name__ == "__main__":
     print(normalize_str(texto), '\n')
     texto = "El amo le ha dado a Dobby un calcetín... Dobby es libre"
     print(count_words(texto), '\n')
+
+    print(safe_divide(6,5), '\n')
+    print(safe_divide(6, 0), '\n')
+    print(read_csv_sum_revenue('./prueba_ventas.csv'), '\n')
+    print(filter_customers_json('./users.json', './users_correct.txt'), '\n')
