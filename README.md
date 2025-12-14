@@ -1,1 +1,2 @@
-Proyecto Practica
+Proyecto Practica (resuelto)
+
