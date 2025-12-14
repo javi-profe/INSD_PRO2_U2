@@ -27,6 +27,13 @@ if __name__ == "__main__":
     print(numpy_minmax_scale([2.4, 2.4, 2.4]), '\n')
     """
     # mejoras 5
+    """
     print(scipy_root_cos_minus_x(),'\n')
     print(scipy_integral_sin(), '\n')
     print(interp_linear([2.5,6,7.8],[6,9,3.7], 9.7))
+    """
+    # mejoras 4
+    print(plot_line_time_series([2,3.4,5,7.8], [1.2,3,4.5,6.7], "figures"),'\n')
+    print(plot_bar([2,3.4,5,7.8], [1.2,3,4.5,6.7], "figures"),'\n')
+    print(plot_scatter([2,3.4,5,7.8], [1.2,3,4.5,6.7], "figures"),'\n')
+

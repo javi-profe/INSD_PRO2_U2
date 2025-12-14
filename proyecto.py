@@ -10,7 +10,9 @@ Instrucciones generales:
 
 # === IMPORTS (añade otros si son necesarios) ===
 import csv, json, os, random, math
+from cProfile import label
 from datetime import datetime, timedelta
+from os.path import exists
 from typing import List, Dict, Optional
 from warnings import catch_warnings
 
@@ -156,15 +158,47 @@ def plot_line_time_series(xs: List[float], ys: List[float], out_path: str) -> bo
     """
     Dibuja línea con título y etiquetas. Guarda en out_path y devuelve True si existe.
     """
-    pass
+    existe_ruta = False
+    if os.path.exists("figures/line.png"):
+        existe_ruta = True
+    plt.figure()
+    plt.plot(xs, ys)
+    plt.xlabel("Tiempo")
+    plt.ylabel("Valor")
+    plt.title("Serie temporal")
+    plt.savefig(out_path + '/line.png')
+    plt.close()
+    return existe_ruta
 
 def plot_bar(categories: List[str], values: List[float], out_path: str) -> bool:
     """Barras con etiquetas. Guarda y devuelve True si existe."""
-    pass
+    existe_ruta = False
+    if os.path.exists("figures/bar.png"):
+        existe_ruta = True
+    plt.figure()
+    plt.bar(categories, values)
+    plt.xlabel("Categorías")
+    plt.ylabel("Valores")
+    plt.title("grafica de barras")
+    plt.savefig(out_path + '/bar.png')
+    plt.close()
+    return existe_ruta
 
 def plot_scatter(x: List[float], y: List[float], out_path: str) -> bool:
     """Dispersión con grid y legend (usa label). Guarda y devuelve True si existe."""
-    pass
+    existe_ruta = False
+    if os.path.exists("figures/scatter.png"):
+        existe_ruta = True
+    plt.figure()
+    plt.scatter(x, y,label="datos")
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.grid(True)
+    plt.legend()
+    plt.title("grafica de dispersión")
+    plt.savefig(out_path + '/scatter.png')
+    plt.close()
+    return existe_ruta
 
 # 7) POO
 class Vector2D:
